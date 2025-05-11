@@ -1,0 +1,358 @@
+/* Custom styling for School Management System */
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  font-weight: 600;
+  padding: 15px 20px;
+  border: none;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.navbar {
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.list-group-item {
+  transition: all 0.2s ease;
+  border-left: none;
+  border-right: none;
+  padding: 15px;
+}
+
+.list-group-item:hover {
+  background-color: #f1f8ff;
+}
+
+.list-group-item:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.list-group-item:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.badge {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.school-card {
+  border-left: 4px solid #007bff;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.school-card:hover {
+  background-color: #f8f9ff;
+}
+
+.school-details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.school-type-badge {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+}
+
+.school-distance {
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #ff5722 !important;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Type-specific styling */
+.school-kindergarten {
+  border-left-color: #17a2b8;
+}
+
+.school-school {
+  border-left-color: #28a745;
+}
+
+.school-college {
+  border-left-color: #ffc107;
+}
+
+.school-university {
+  border-left-color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+/* Toast styling */
+.toast {
+  min-width: 300px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toast-header {
+  border-radius: 8px 8px 0 0;
+  padding: 12px 15px;
+}
+
+.toast-body {
+  padding: 15px;
+  font-size: 0.95rem;
+}
+
+/* Spinner styling */
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Form controls */
+.form-control {
+  border-radius: 6px;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Button styling */
+.btn {
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-weight: 500;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-info {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+/* Contact info */
+.contact-info {
+  margin-top: 5px;
+  font-size: 0.85rem;
+}
+
+.contact-info i {
+  margin-right: 5px;
+  color: #6c757d;
+}
+
+.contact-info a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* Delete button styling */
+.delete-school-btn {
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.delete-school-btn:hover {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+  transform: scale(1.1);
+}
+
+.delete-school-btn i {
+  font-size: 1rem;
+}
+
+/* Pagination styling */
+.pagination {
+  margin-bottom: 20px;
+}
+
+.page-item .page-link {
+  color: #0d6efd;
+  border-color: #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.page-item:not(.active):not(.disabled) .page-link:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+
+/* Result count indicator */
+.result-count {
+  font-style: italic;
+  color: #6c757d;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+/* API Testing Section Styling */
+.accordion-button {
+  font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+
+#apiTestResponse,
+#postmanRequest {
+  max-height: 400px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.alert-secondary {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+/* Tab Navigation */
+.nav-link {
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+}
+
+/* Navigation buttons styling - enhanced visibility */
+.navbar-nav .nav-link {
+  margin: 0 5px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .nav-link.active {
+  background-color: #ffffff;
+  color: #0d6efd;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}

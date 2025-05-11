@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "School Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "A collection to test the School Management API endpoints"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Example School\",\n  \"address\": \"123 Education St, City, Country\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/addSchool",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "addSchool"]
+        },
+        "description": "Adds a new school to the database"
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools by Proximity",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/listSchools?latitude=37.7749&longitude=-122.4194",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "listSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "37.7749"
+            },
+            {
+              "key": "longitude",
+              "value": "-122.4194"
+            }
+          ]
+        },
+        "description": "Lists all schools sorted by proximity to the provided coordinates"
+      },
+      "response": []
+    },
+    {
+      "name": "Find Real Schools (OpenStreetMap)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/findRealSchools?latitude=37.7749&longitude=-122.4194",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "findRealSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "37.7749"
+            },
+            {
+              "key": "longitude",
+              "value": "-122.4194"
+            }
+          ]
+        },
+        "description": "Find real schools and educational facilities from OpenStreetMap based on coordinates"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete School",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/deleteSchool/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "deleteSchool", "1"]
+        },
+        "description": "Delete a school by its ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Home Page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Returns the web interface for the School Management System"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

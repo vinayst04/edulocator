@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Management System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-building"></i> School Management System
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" id="nav-main" href="#main-section"
+              >Main</a
+            >
+            <a class="nav-link" id="nav-api-test" href="#api-test-section"
+              >API Testing</a
+            >
+          </div>
+        </div>
+        <div class="d-flex">
+          <span class="navbar-text text-white me-3">
+            <i class="bi bi-info-circle"></i> Find schools near you
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="container mt-4" id="main-section">
+      <div class="row">
+        <!-- Add School Form -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5>Add New School</h5>
+            </div>
+            <div class="card-body">
+              <form id="addSchoolForm">
+                <div class="mb-3">
+                  <label for="schoolName" class="form-label">School Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="schoolName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="schoolAddress" class="form-label"
+                    >School Address</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="schoolAddress"
+                    required
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="latitude" class="form-label">Latitude</label>
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="latitude"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="longitude" class="form-label">Longitude</label>
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="longitude"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">
+                    Add School
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+              <h5>Get Current Location</h5>
+            </div>
+            <div class="card-body">
+              <p>
+                Click the button below to use your current location for
+                searching nearby schools.
+              </p>
+              <button id="getCurrentLocation" class="btn btn-info text-white">
+                Use My Location
+              </button>
+              <div id="currentLocationInfo" class="mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- List Schools -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h5>Find Schools Near Me</h5>
+            </div>
+            <div class="card-body">
+              <form id="findSchoolsForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="searchLatitude" class="form-label"
+                      >Latitude</label
+                    >
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="searchLatitude"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="searchLongitude" class="form-label"
+                      >Longitude</label
+                    >
+                    <input
+                      type="number"
+                      step="any"
+                      class="form-control"
+                      id="searchLongitude"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-success">
+                    Find Schools
+                  </button>
+                </div>
+              </form>
+              <div class="mt-3">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="useRealSchools"
+                    checked
+                  />
+                  <label class="form-check-label" for="useRealSchools"
+                    >Use real-time school data from OpenStreetMap</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div
+              class="card-header bg-secondary text-white d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0"><i class="bi bi-geo-alt"></i> Nearby Schools</h5>
+              <button
+                id="refreshList"
+                class="btn btn-sm btn-outline-light"
+                title="Refresh list"
+              >
+                <i class="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="schoolsList">
+                <p class="text-center text-muted">
+                  Search for schools to see results
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Test Section -->
+    <div class="container mt-4" id="api-test-section">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header bg-dark text-white">
+              <h5><i class="bi bi-code-slash"></i> API Testing Playground</h5>
+            </div>
+            <div class="card-body">
+              <p>
+                Test the School Management API endpoints directly from this
+                interface. Results will be displayed in JSON format.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Test API Forms -->
+          <div class="accordion" id="apiTestAccordion">
+            <!-- Add School Test -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="addSchoolHeading">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#addSchoolCollapse"
+                >
+                  <i class="bi bi-plus-circle me-2"></i> POST /addSchool
+                </button>
+              </h2>
+              <div
+                id="addSchoolCollapse"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#apiTestAccordion"
+              >
+                <div class="accordion-body">
+                  <form id="testAddSchoolForm">
+                    <div class="mb-3">
+                      <label for="test-schoolName" class="form-label"
+                        >School Name</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="test-schoolName"
+                        value="Test School"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="test-schoolAddress" class="form-label"
+                        >School Address</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="test-schoolAddress"
+                        value="123 Test Street"
+                        required
+                      />
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="test-latitude" class="form-label"
+                          >Latitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-latitude"
+                          value="37.7749"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="test-longitude" class="form-label"
+                          >Longitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-longitude"
+                          value="-122.4194"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-primary">
+                        Test Add School
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- List Schools Test -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="listSchoolsHeading">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#listSchoolsCollapse"
+                >
+                  <i class="bi bi-list-ul me-2"></i> GET /listSchools
+                </button>
+              </h2>
+              <div
+                id="listSchoolsCollapse"
+                class="accordion-collapse collapse"
+                data-bs-parent="#apiTestAccordion"
+              >
+                <div class="accordion-body">
+                  <form id="testListSchoolsForm">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="test-listLatitude" class="form-label"
+                          >Latitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-listLatitude"
+                          value="37.7749"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="test-listLongitude" class="form-label"
+                          >Longitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-listLongitude"
+                          value="-122.4194"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-success">
+                        Test List Schools
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Find Real Schools Test -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="findRealSchoolsHeading">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#findRealSchoolsCollapse"
+                >
+                  <i class="bi bi-geo-alt me-2"></i> GET /findRealSchools
+                </button>
+              </h2>
+              <div
+                id="findRealSchoolsCollapse"
+                class="accordion-collapse collapse"
+                data-bs-parent="#apiTestAccordion"
+              >
+                <div class="accordion-body">
+                  <form id="testFindRealSchoolsForm">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="test-findRealLatitude" class="form-label"
+                          >Latitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-findRealLatitude"
+                          value="37.7749"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="test-findRealLongitude" class="form-label"
+                          >Longitude</label
+                        >
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control"
+                          id="test-findRealLongitude"
+                          value="-122.4194"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-info text-white">
+                        Test Find Real Schools
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Delete School Test -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="deleteSchoolHeading">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#deleteSchoolCollapse"
+                >
+                  <i class="bi bi-trash me-2"></i> DELETE /deleteSchool/:id
+                </button>
+              </h2>
+              <div
+                id="deleteSchoolCollapse"
+                class="accordion-collapse collapse"
+                data-bs-parent="#apiTestAccordion"
+              >
+                <div class="accordion-body">
+                  <form id="testDeleteSchoolForm">
+                    <div class="mb-3">
+                      <label for="test-deleteId" class="form-label"
+                        >School ID</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="test-deleteId"
+                        required
+                      />
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-danger">
+                        Test Delete School
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <!-- API Test Results -->
+          <div class="card">
+            <div
+              class="card-header bg-secondary text-white d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0"><i class="bi bi-braces"></i> API Response</h5>
+              <button
+                id="copyPostmanButton"
+                class="btn btn-sm btn-outline-light"
+                title="Copy Postman request"
+              >
+                <i class="bi bi-clipboard"></i> Copy Postman
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                  <span
+                    ><strong>Status:</strong>
+                    <span id="apiTestStatus">No request sent</span></span
+                  >
+                  <span
+                    ><strong>Time:</strong>
+                    <span id="apiTestTime">-</span></span
+                  >
+                </div>
+                <div class="alert alert-secondary">
+                  <strong>Endpoint:</strong> <span id="apiTestEndpoint">-</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Response:</label>
+                <pre id="apiTestResponse" class="p-3 bg-light border rounded">
+No response yet</pre
+                >
+              </div>
+              <div>
+                <label class="form-label">Equivalent Postman Request:</label>
+                <pre id="postmanRequest" class="p-3 bg-light border rounded">
+No request made yet</pre
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Response Alert -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div
+        id="responseAlert"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto" id="alertTitle">Notification</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body" id="alertMessage"></div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
