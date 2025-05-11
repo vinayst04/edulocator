@@ -1,47 +1,45 @@
 # EduLocator
 
-A comprehensive School Management System with geolocation capabilities for finding nearby educational institutions.
+A comprehensive School Management System that helps find and manage educational institutions based on geographic proximity.
 
 ## Features
 
-- Add schools with location coordinates
-- Find schools by proximity to a specified location
-- Query real school data from OpenStreetMap API
-- Manage school data with CRUD operations
-- In-memory storage fallback when database is unavailable
-- API testing playground for direct endpoint testing
+- Manage school data with full CRUD operations
+- Find schools by proximity to any location
+- Real-time educational data from OpenStreetMap API
+- Interactive geolocation functionality
+- Responsive Bootstrap UI with modern design
+- Intelligent fallback to in-memory storage when database is unavailable
+- Interactive API testing playground
 
-## Technologies Used
+## Tech Stack
 
-- **Backend**: Node.js with Express
+- **Backend**: Node.js, Express
 - **Database**: CockroachDB (PostgreSQL compatible)
-- **Frontend**: HTML, CSS, JavaScript with Bootstrap
-- **APIs**: OpenStreetMap for real school data
+- **Frontend**: HTML5, CSS3, JavaScript ES6+, Bootstrap 5
+- **External APIs**: OpenStreetMap
 - **Deployment**: Vercel
 
-## Getting Started
+## Live Demo
 
-### Prerequisites
+Visit the live application: [https://edulocator.vercel.app](https://edulocator.vercel.app)
 
-- Node.js (v14 or higher)
-- A CockroachDB database or other PostgreSQL-compatible database
-
-### Installation
+## Installation
 
 1. Clone the repository
 
-```
+```bash
 git clone https://github.com/vinayst04/edulocator.git
 cd edulocator
 ```
 
 2. Install dependencies
 
-```
+```bash
 npm install
 ```
 
-3. Set up environment variables in config.env
+3. Configure environment variables
 
 ```
 PORT=3000
@@ -50,23 +48,47 @@ DATABASE_URL=your_cockroachdb_connection_string
 
 4. Initialize the database
 
-```
+```bash
 node db/init.js
 ```
 
 5. Start the server
 
+```bash
+npm start
 ```
-node server.js
-```
 
-## API Endpoints
+## API Documentation
 
-- `POST /api/addSchool` - Add a new school
-- `GET /api/listSchools` - List schools sorted by proximity
-- `GET /api/findRealSchools` - Find real schools from OpenStreetMap
-- `DELETE /api/deleteSchool/:id` - Delete a school by ID
+### Add School
 
-## License
+- **Endpoint**: `POST /api/addSchool`
+- **Description**: Add a new school with location data
+- **Request Body**:
+  ```json
+  {
+    "name": "Example School",
+    "address": "123 Education St",
+    "latitude": 40.7128,
+    "longitude": -74.006
+  }
+  ```
 
-This project is licensed under the MIT License
+### List Schools
+
+- **Endpoint**: `GET /api/listSchools?latitude=40.7128&longitude=-74.0060`
+- **Description**: List all schools sorted by proximity to the provided coordinates
+
+### Find Real Schools
+
+- **Endpoint**: `GET /api/findRealSchools?latitude=40.7128&longitude=-74.0060`
+- **Description**: Query OpenStreetMap for actual educational institutions near the coordinates
+
+### Delete School
+
+- **Endpoint**: `DELETE /api/deleteSchool/:id`
+- **Description**: Remove a school from the database
+
+## Contact
+
+For questions or collaboration opportunities, please reach out directly.

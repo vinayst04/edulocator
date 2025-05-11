@@ -4,17 +4,20 @@ const dotenv = require("dotenv");
 // Load environment variables
 dotenv.config({ path: "./config.env" });
 
+/**
+ * Initialize the database and create required tables
+ * @returns {Promise<boolean>} Success status
+ */
 async function initializeDatabase() {
   try {
-    // Configure connection from environment variables
     const connectionString = process.env.DATABASE_URL;
 
     if (!connectionString) {
-      console.error("DATABASE_URL environment variable not set");
+      console.error("Database connection string not configured");
       return false;
     }
 
-    // Create a connection pool
+    // Create database connection
     const pool = new Pool({
       connectionString,
       ssl: {
@@ -22,11 +25,10 @@ async function initializeDatabase() {
       },
     });
 
-    // Test the connection
+    // Verify connection
     await pool.query("SELECT NOW()");
-    console.log("Successfully connected to CockroachDB");
 
-    // Create the schools table if it doesn't exist
+    // Create schools table if it doesn't exist
     await pool.query(`
       CREATE TABLE IF NOT EXISTS schools (
         id SERIAL PRIMARY KEY,
@@ -38,32 +40,26 @@ async function initializeDatabase() {
       )
     `);
 
-    console.log("Database tables initialized successfully");
-
-    // Close the connection pool
+    console.log("Database schema initialized");
     await pool.end();
-
     return true;
   } catch (error) {
-    console.error("Error initializing database:", error);
-
-    // Don't throw the error, just return false to indicate failure
+    console.error("Database initialization error:", error.message);
     return false;
   }
 }
 
-// If this script is run directly, call the function
+// Allow direct execution
 if (require.main === module) {
   initializeDatabase().then((success) => {
     if (success) {
-      console.log("Database initialization complete");
+      console.log("Database setup complete");
       process.exit(0);
     } else {
-      console.error("Database initialization failed");
+      console.error("Database setup failed");
       process.exit(1);
     }
   });
 }
 
-// Export the function to be used in the main server file
 module.exports = initializeDatabase;

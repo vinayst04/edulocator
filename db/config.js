@@ -7,40 +7,40 @@ dotenv.config({ path: "./config.env" });
 let pool = null;
 
 try {
-  // Configure pool options
+  // Configure database connection
   const connectionString = process.env.DATABASE_URL;
 
   // Create connection pool
   pool = new Pool({
     connectionString,
     ssl: {
-      rejectUnauthorized: false, // Required for some hosted PostgreSQL providers
+      rejectUnauthorized: false,
     },
-    max: 10, // Maximum number of clients in the pool
-    idleTimeoutMillis: 30000, // How long a client is allowed to remain idle before being closed
+    max: 10,
+    idleTimeoutMillis: 30000,
   });
 
   // Test connection
   pool.connect((err, client, release) => {
     if (err) {
-      console.error("Error connecting to CockroachDB:", err.message);
+      console.error("Database connection error:", err.message);
       return;
     }
 
     client.query("SELECT NOW()", (err, result) => {
       release();
       if (err) {
-        console.error("Error executing test query:", err.message);
+        console.error("Query error:", err.message);
         return;
       }
-      console.log("Successfully connected to CockroachDB!");
+      console.log("Database connected successfully");
     });
   });
 } catch (error) {
   console.error("Failed to initialize database connection:", error);
 }
 
-// Function to check if database is connected
+// Check database connection status
 const isDatabaseConnected = () => {
   return !!pool;
 };
